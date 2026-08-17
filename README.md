@@ -6,6 +6,7 @@ Any change pushed to the `main` branch triggers an automated deployment, removin
 
 ---
 ## Repository Structure
+```
 .
 ├── .github/
 │   └── workflows/
@@ -16,50 +17,51 @@ Any change pushed to the `main` branch triggers an automated deployment, removin
 │   └── style.css
 │
 └── README.md
+```
 ---
 ## Architecture
 
 ```
-┌──────────────────────┐
-│      Developer       │
-│                      │
-│  Edit HTML / CSS     │
-└──────────┬───────────┘
-           │
-           │ git push
-           ▼
-┌──────────────────────┐
-│   GitHub Repository  │
-│      main branch     │
-└──────────┬───────────┘
-           │
-           │ workflow trigger
-           ▼
-┌────────────────────────────────┐
-│       GitHub Actions           │
-│                                │
-│  ┌──────────────────────────┐  │
-│  │ Checkout repository      │  │
-│  ├──────────────────────────┤  │
-│  │ Configure AWS credentials│  │
-│  ├──────────────────────────┤  │
-│  │ Sync website files       │  │
-│  └──────────────────────────┘  │
-└───────────────┬────────────────┘
-                │
-                │ aws s3 sync
-                ▼
-┌──────────────────────────────┐
-│          Amazon S3           │
-│                              │
-│   Static Website Hosting     │
-│                              │
-│   ├── index.html             │
-│   └── style.css              │
-└──────────────┬───────────────┘
-               │
-               ▼
-           Live Website
+                                            ┌──────────────────────┐
+                                            │      Developer       │
+                                            │                      │
+                                            │  Edit HTML / CSS     │
+                                            └──────────┬───────────┘
+                                                       │
+                                                       │ git push
+                                                       ▼
+                                            ┌──────────────────────┐
+                                            │   GitHub Repository  │
+                                            │      main branch     │
+                                            └──────────┬───────────┘
+                                                       │
+                                                       │ workflow trigger
+                                                       ▼
+                                            ┌────────────────────────────────┐
+                                            │       GitHub Actions           │
+                                            │                                │
+                                            │  ┌──────────────────────────┐  │
+                                            │  │ Checkout repository      │  │
+                                            │  ├──────────────────────────┤  │
+                                            │  │ Configure AWS credentials│  │
+                                            │  ├──────────────────────────┤  │
+                                            │  │ Sync website files       │  │
+                                            │  └──────────────────────────┘  │
+                                            └───────────────┬────────────────┘
+                                                            │
+                                                            │ aws s3 sync
+                                                            ▼
+                                            ┌──────────────────────────────┐
+                                            │          Amazon S3           │
+                                            │                              │
+                                            │   Static Website Hosting     │
+                                            │                              │
+                                            │   ├── index.html             │
+                                            │   └── style.css              │
+                                            └──────────────┬───────────────┘
+                                                           │
+                                                           ▼
+                                                       Live Website
 ```
 ---
 ## Features
@@ -119,27 +121,27 @@ AWS_REGION
 ---
 ## Deployment Flow
 ```
-Developer
-    │
-    │ git push
-    ▼
-GitHub
-    │
-    │ push to main
-    ▼
-GitHub Actions
-    │
-    ├── Checkout
-    │
-    ├── Configure AWS
-    │
-    └── Sync files
-            │
-            ▼
-       Amazon S3
-            │
-            ▼
-      Static Website
+                                                       Developer
+                                                           │
+                                                           │ git push
+                                                           ▼
+                                                       GitHub
+                                                           │
+                                                           │ push to main
+                                                           ▼
+                                                       GitHub Actions
+                                                           │
+                                                           ├── Checkout
+                                                           │
+                                                           ├── Configure AWS
+                                                           │
+                                                           └── Sync files
+                                                                   │
+                                                                   ▼
+                                                              Amazon S3
+                                                                   │
+                                                                   ▼
+                                                             Static Website
 ```
 ---
 ## Project Goals
